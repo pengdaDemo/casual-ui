@@ -1,41 +1,50 @@
 <template>
-  <el-menu
-    style="width: 19%"
-    default-active="2"
-    class="el-menu-vertical-demo"
-    @open="handleOpen"
-    @close="handleClose"
-    background-color="#545c64"
-    text-color="#fff"
-    active-text-color="#ffd04b">
-    <el-menu-item index="2">
-      <i class="el-icon-menu"></i>
-      <span slot="title">导航二</span>
-    </el-menu-item>
-    <el-menu-item index="4">
-      <i class="el-icon-setting"></i>
-      <span slot="title">导航四</span>
-    </el-menu-item>
+<div>
+  <el-menu background-color="rgb(84, 63, 54)"
+           text-color="#fff"
+           active-text-color="#ffd04b"
+           :defaultActive="activeIndex2"
+           mode="horizontal"
+           style="height:70px;"
+           :router="true">
+    <el-menu-item index="1">处理中心</el-menu-item>
+    <el-menu-item index="stockMenu" :route="{path:'/stockMenu'}">监控中心</el-menu-item>
+    <el-submenu index="2">
+      <template slot="title">我的工作台</template>
+      <el-menu-item index="2-1">选项1</el-menu-item>
+      <el-menu-item index="2-2">选项2</el-menu-item>
+      <el-menu-item index="2-3">选项3</el-menu-item>
+      <el-submenu index="2-4">
+        <template slot="title">选项4</template>
+        <el-menu-item index="2-4-1">选项1</el-menu-item>
+        <el-menu-item index="2-4-2">选项2</el-menu-item>
+        <el-menu-item index="2-4-3">选项3</el-menu-item>
+      </el-submenu>
+    </el-submenu>
+    <el-menu-item index="3" disabled>消息中心</el-menu-item>
+    <el-menu-item index="4"><a href="https://www.ele.me" target="_blank">订单管理</a></el-menu-item>
   </el-menu>
+  <div style="position: absolute;top:71px;bottom:0px;width:100%;">
+    <router-view/>
+  </div>
+</div>
 </template>
 
 <script>
-export default {
-  name: 'Menu',
-  data () {
-    return {
-      msg: 'Welcome to Your Vue.js App'
-    }
-  },
-  methods: {
-    handleOpen(key, keyPath) {
-      console.log(key, keyPath);
+  export default {
+    name: "Menu",
+    data() {
+      return {
+        activeIndex: '1',
+        activeIndex2: 'stockMenu'
+      };
     },
-    handleClose(key, keyPath) {
-      console.log(key, keyPath);
+    methods: {
+      handleSelect(key, keyPath) {
+        console.log(key, keyPath);
+      }
     }
   }
-}
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
