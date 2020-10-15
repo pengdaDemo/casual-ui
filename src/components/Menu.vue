@@ -1,30 +1,30 @@
 <template>
-<div>
-  <el-menu background-color="rgb(84, 63, 54)"
+<div style="margin: 0;padding: 0;background-color: aquamarine;height: 100px;width: 100%">
+  <el-menu background-color="#3DBF28"
            text-color="#fff"
            active-text-color="#ffd04b"
            :defaultActive="activeIndex2"
            mode="horizontal"
-           style="height:70px;"
+           style="height:70px;margin:0 0 30px 1000px;width: 600px"
            :router="true">
-    <el-menu-item index="1">处理中心</el-menu-item>
-    <el-menu-item index="stockMenu" :route="{path:'/stockMenu'}">监控中心</el-menu-item>
+    <el-menu-item index="/" :route="{path:'/'}">首页</el-menu-item>
+    <el-menu-item index="stockMenu" :route="{path:'/stockMenu'}">股票中心</el-menu-item>
     <el-submenu index="2">
       <template slot="title">我的工作台</template>
+      <el-row>
       <el-menu-item index="2-1">选项1</el-menu-item>
+      </el-row>
+      <el-row>
       <el-menu-item index="2-2">选项2</el-menu-item>
+      </el-row>
+      <el-row>
       <el-menu-item index="2-3">选项3</el-menu-item>
-      <el-submenu index="2-4">
-        <template slot="title">选项4</template>
-        <el-menu-item index="2-4-1">选项1</el-menu-item>
-        <el-menu-item index="2-4-2">选项2</el-menu-item>
-        <el-menu-item index="2-4-3">选项3</el-menu-item>
-      </el-submenu>
+      </el-row>
     </el-submenu>
     <el-menu-item index="3" disabled>消息中心</el-menu-item>
-    <el-menu-item index="4"><a href="https://www.ele.me" target="_blank">订单管理</a></el-menu-item>
+    <el-menu-item index="4"><a href="https://www.ele.me" target="_blank">登录</a></el-menu-item>
   </el-menu>
-  <div style="position: absolute;top:71px;bottom:0px;width:100%;">
+  <div style="position: absolute;margin:0px;padding:0px;width:100%;">
     <router-view/>
   </div>
 </div>
@@ -63,4 +63,5 @@ li {
 a {
   color: #42b983;
 }
+
 </style>
