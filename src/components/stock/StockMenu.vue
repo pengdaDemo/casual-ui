@@ -1,50 +1,71 @@
 <template>
   <div id="vue">
     <el-col :span="12">
-    <span style="width: 100px;margin-right: 200px">可买入股票</span>
+      <el-col>
+    <span style="width: 100px;margin-left: 200px">可买入股票</span>
+      <template>
+        <el-select v-model="level" placeholder="请选择" style="width: 120px;margin-left: 100px" @change="findStock()">
+          <el-option
+            v-for="item in options"
+            :key="item.value"
+            :label="item.label"
+            :value="item.value">
+          </el-option>
+        </el-select>
+      </template>
+      </el-col>
     <el-table
-      :data="stockList"
+      :data="buyList"
       stripe
-      style="width: 80%">
+      style="width: 80%;margin-left: 80px">
       <el-table-column
-        prop="date"
+        prop="stock_Name"
+        label="股票名称"
+        width="180">
+      </el-table-column>
+      <el-table-column
+        prop="stock_code"
         label="股票代码"
         width="180">
       </el-table-column>
       <el-table-column
-        prop="name"
+        prop="now_point"
         label="当前价格"
-        width="180">
+        width="160">
       </el-table-column>
       <el-table-column
-        prop="address"
-        label="建议入手价">
+        prop="buy_point"
+        label="入手价">
       </el-table-column>
     </el-table>
     </el-col>
     <el-col :span="12">
-      <span style="width: 100px;margin-right: 200px">可卖入股票</span>
+      <span style="width: 100px;margin-right: 200px">可卖出股票</span>
     <el-table
-      :data="stockList"
+      :data="sellList"
       stripe
       style="width: 80%">
       <el-table-column
-        prop="date"
+        prop="stock_Name"
+        label="股票名称"
+        width="180">
+      </el-table-column>
+      <el-table-column
+        prop="stock_code"
         label="股票代码"
         width="180">
       </el-table-column>
       <el-table-column
-        prop="name"
+        prop="now_point"
         label="当前价格"
-        width="180">
+        width="160">
       </el-table-column>
       <el-table-column
-        prop="address"
-        label="建议入手价">
+        prop="sell_point"
+        label="卖出价">
       </el-table-column>
     </el-table>
     </el-col>
-    <el-button @click="test()">测试</el-button>
   </div>
 </template>
 
@@ -53,32 +74,33 @@ export default { //这里需要将模块引出，可在其他地方使用
   name: "stockMenu",
   data (){ //注意：data即使不需要传数据，也必须return,否则会报错
     return {
-      stockList: [{
-        date: '2016-05-02',
-        name: '王小虎',
-        address: '上海市普陀区金沙江路 1518 弄'
+      buyList: [],
+      sellList: [],
+      level: '2',
+      options: [{
+        value: '3',
+        label: '短期持有'
       }, {
-        date: '2016-05-04',
-        name: '王小虎',
-        address: '上海市普陀区金沙江路 1517 弄'
+        value: '2',
+        label: '中期持有'
       }, {
-        date: '2016-05-01',
-        name: '王小虎',
-        address: '上海市普陀区金沙江路 1519 弄'
-      }, {
-        date: '2016-05-03',
-        name: '王小虎',
-        address: '上海市普陀区金沙江路 1516 弄'
+        value: '1',
+        label: '长期持有'
       }]
+
     }
   },
   methods: {
-      test() {
-        console.log("1111111111111111111111111");
-        this.$axios.get('/api/testApi').then(res=>{
+      findStock() {
+        this.$axios.get('/api/stock/findStockList?riseCount=' + this.level).then(res=>{
           console.log(res)
+          this.buyList = res.data['buyList'];
+          this.sellList = res.data['sellList'];
         })
     }
+  },
+  mounted() {
+    this.findStock();
   }
 }
 </script>

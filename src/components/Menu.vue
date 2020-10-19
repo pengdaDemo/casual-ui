@@ -1,18 +1,18 @@
 <template>
-<div style="margin: 0;padding: 0;background-color: aquamarine;height: 100px;width: 100%">
+<div id="myMenu" style="margin: 0;padding: 0;height: 200px;width: 100%">
   <el-menu background-color="#3DBF28"
            text-color="#fff"
            active-text-color="#ffd04b"
            :defaultActive="activeIndex2"
            mode="horizontal"
-           style="height:70px;margin:0 0 30px 1000px;width: 600px"
+           style="height:70px;margin: auto;width: 600px;margin-bottom: 200px"
            :router="true">
     <el-menu-item index="/" :route="{path:'/'}">首页</el-menu-item>
     <el-menu-item index="stockMenu" :route="{path:'/stockMenu'}">股票中心</el-menu-item>
     <el-submenu index="2">
       <template slot="title">我的工作台</template>
       <el-row>
-      <el-menu-item index="2-1">选项1</el-menu-item>
+      <el-menu-item index="2-1">我的股票</el-menu-item>
       </el-row>
       <el-row>
       <el-menu-item index="2-2">选项2</el-menu-item>
@@ -22,7 +22,7 @@
       </el-row>
     </el-submenu>
     <el-menu-item index="3" disabled>消息中心</el-menu-item>
-    <el-menu-item index="4"><a href="https://www.ele.me" target="_blank">登录</a></el-menu-item>
+    <el-menu-item index="4" :route="{path:'/login'}">登录</el-menu-item>
   </el-menu>
   <div style="position: absolute;margin:0px;padding:0px;width:100%;">
     <router-view/>
@@ -63,5 +63,8 @@ li {
 a {
   color: #42b983;
 }
-
+#myMenu {
+  background-image: url("../assets/shouye.jpg");
+  background-size:100% 100%;
+}
 </style>
