@@ -3,7 +3,7 @@
   <el-menu background-color="#3DBF28"
            text-color="#fff"
            active-text-color="#ffd04b"
-           :defaultActive="$route.path"
+           :defaultActive="activeIndex2"
            mode="horizontal"
            style="height:70px;margin: auto;width: 600px;margin-bottom: 200px"
            :router="true">
@@ -46,11 +46,9 @@
         console.log(key, keyPath);
       },
       loginOut(){
-        console.log("111111111111111")
         this.$cookies.remove('username')
         this.$cookies.remove('userId')
-        this.$router.push({path:'/stockMenu'})
-        //location.reload();
+        location.reload();
       }
     }
   }

@@ -18,11 +18,12 @@
       </el-form-item>
       <el-form-item label="出生日期" prop="birthday">
         <el-col :span="11">
-          <el-date-picker type="date" placeholder="选择日期" v-model="form.birthday" style="width: 100%;"></el-date-picker>
+          <el-date-picker type="date" placeholder="选择日期" format="yyyy 年 MM 月 dd 日"
+                          value-format="yyyy-MM-dd HH:mm:ss" v-model="form.birthday" style="width: 100%;"></el-date-picker>
         </el-col>
       </el-form-item>
       <el-form-item label="性别">
-        <el-radio-group v-model="form.resource">
+        <el-radio-group v-model="form.sex">
           <el-radio label="男"></el-radio>
           <el-radio label="女"></el-radio>
         </el-radio-group>
@@ -59,7 +60,7 @@
           mobile: '',
           email: '',
           birthday: '',
-          resource: '男',
+          sex: '男',
         },
         rules: {
           username: [{required: true, message: '请输入用户名', trigger: 'blur'}],
@@ -74,13 +75,19 @@
     methods: {
       onSubmit(formName) {
         this.$refs[formName].validate((valid) => {
-          console.log(this.form);
-          this.$refs[formName].resetFields();
-        });
-        // this.$axios.post(`/login`, this.form).then(body =>{
-        //
-        // });
+          this.$axios.post(`/userRegister`, this.qs.stringify(this.form)).then(body => {
+            if (body.data.code === 200) {
+              this.$cookies.set("userId", body.data.data.user_id, "1h")
+              this.$cookies.set("username", body.data.data.username, "1h")
+              this.$router.push({path: '/stockMenu'})
+              this.$message.success(body.data.msg);
+            } else {
+              this.$message.error(body.data.msg);
+            }
+            this.$refs[formName].resetFields();
+          });
 
+        });
       }
     }
   }

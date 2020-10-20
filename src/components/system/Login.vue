@@ -7,7 +7,7 @@
             <el-input v-model="form.username"></el-input>
           </el-form-item>
           <el-form-item label="密码" prop="password">
-            <el-input placeholder="请输入密码" v-model="form.password" show-password></el-input>
+            <el-input placeholder="请输入密码" v-model="form.password" show-password @keyup.enter.native="onSubmit"></el-input>
           </el-form-item>
           <el-button type="primary" style="margin: auto" @click="onSubmit">登录</el-button>
         </el-form>
@@ -19,7 +19,7 @@
           </el-form-item>
           <el-form-item label="验证码" prop="password">
             <el-col :span="16">
-            <el-input style="width: 80px;margin-left:90px" v-model="phone.verification"></el-input>
+            <el-input style="width: 80px;margin-left:90px" v-model="phone.verification" @keyup.enter.native="phoneSubmit"></el-input>
             </el-col>
             <el-col :span="8">
             <div style="width: 120px">
@@ -62,12 +62,15 @@ export default {
   },
   methods: {
     onSubmit() {
-      this.$cookies.set("userId","1","1h")
-      this.$cookies.set("username","kkkkjjjj","1h")
-      this.$router.push({path:'/stockMenu'})
-      // this.$axios.post(`/login`, this.form).then(body =>{
-      //
-      // });
+      this.$axios.post(`/userLogin`, this.qs.stringify(this.form)).then(body =>{
+        if(body.data.code === 200) {
+          this.$cookies.set("userId",body.data.data.user_id,"1h")
+          this.$cookies.set("username",body.data.data.username,"1h")
+          this.$router.push({path:'/stockMenu'})
+        } else {
+          this.$message.error(body.data.msg);
+        }
+      });
 
     },
     phoneSubmit() {

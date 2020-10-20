@@ -7,11 +7,13 @@ import 'element-ui/lib/theme-chalk/index.css'
 import router from './router'
 import axios from 'axios'
 import VueCookies from 'vue-cookies'
+import qs from 'qs'
 
 Vue.prototype.$axios = axios
 Vue.use(ElementUI)
 Vue.config.productionTip = false
 Vue.use(VueCookies)
+Vue.prototype.qs = qs;
 
 /* eslint-disable no-new */
 new Vue({
