@@ -6,10 +6,12 @@ import ElementUI from 'element-ui' //新添加
 import 'element-ui/lib/theme-chalk/index.css'
 import router from './router'
 import axios from 'axios'
+import VueCookies from 'vue-cookies'
 
 Vue.prototype.$axios = axios
 Vue.use(ElementUI)
 Vue.config.productionTip = false
+Vue.use(VueCookies)
 
 /* eslint-disable no-new */
 new Vue({
