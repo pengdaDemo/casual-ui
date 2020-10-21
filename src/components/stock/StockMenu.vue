@@ -13,7 +13,6 @@
           </el-option>
         </el-select>
       </template>
-        <stock-curve :value="value"></stock-curve>
       </el-col>
     <el-table
       :data="buyList"
@@ -22,21 +21,28 @@
       <el-table-column
         prop="stock_Name"
         label="股票名称"
-        width="180">
+        width="120">
       </el-table-column>
       <el-table-column
         prop="stock_code"
         label="股票代码"
-        width="180">
+        width="120">
       </el-table-column>
       <el-table-column
         prop="now_point"
         label="当前价格"
-        width="160">
+        width="120">
       </el-table-column>
       <el-table-column
         prop="buy_point"
-        label="入手价">
+        label="入手价"
+        width="120">
+      </el-table-column>
+      <el-table-column
+        label="行情">
+        <template slot-scope="scope">
+        <stock-curve :value="scope.row"></stock-curve>
+        </template>
       </el-table-column>
     </el-table>
     </el-col>
@@ -49,21 +55,28 @@
       <el-table-column
         prop="stock_Name"
         label="股票名称"
-        width="180">
+        width="120">
       </el-table-column>
       <el-table-column
         prop="stock_code"
         label="股票代码"
-        width="180">
+        width="120">
       </el-table-column>
       <el-table-column
         prop="now_point"
         label="当前价格"
-        width="160">
+        width="120">
       </el-table-column>
       <el-table-column
         prop="sell_point"
-        label="卖出价">
+        label="卖出价"
+        width="120">
+      </el-table-column>
+      <el-table-column
+        label="行情">
+        <template slot-scope="scope">
+        <stock-curve :value="scope.row"></stock-curve>
+        </template>
       </el-table-column>
     </el-table>
     </el-col>
@@ -100,7 +113,6 @@ export default { //这里需要将模块引出，可在其他地方使用
   methods: {
       findStock() {
         this.$axios.get('/api/stock/findStockList?riseCount=' + this.level).then(res=>{
-          console.log(res)
           this.buyList = res.data['buyList'];
           this.sellList = res.data['sellList'];
         })

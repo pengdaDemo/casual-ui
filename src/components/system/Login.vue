@@ -4,7 +4,7 @@
       <el-tab-pane label="用户密码登录">
         <el-form ref="form"  :rules="rules" :model="form" label-width="80px" style="width: 400px;margin: auto">
           <el-form-item label="用户名" prop="username">
-            <el-input v-model="form.username"></el-input>
+            <el-input value="彭达" v-model="form.username"></el-input>
           </el-form-item>
           <el-form-item label="密码" prop="password">
             <el-input placeholder="请输入密码" v-model="form.password" show-password @keyup.enter.native="onSubmit"></el-input>
@@ -46,8 +46,8 @@ export default {
     };
     return {
       form: {
-        username: '',
-        password: ''
+        username: '彭达',
+        password: '1234'
       },
       phone: {
         code:'',
@@ -74,12 +74,25 @@ export default {
 
     },
     phoneSubmit() {
-      console.log("手机登录")
+      this.$axios.post(`/phoneLogin`, this.qs.stringify(this.phone)).then(body =>{
+        if(body.data.code === 200) {
+          this.$cookies.set("userId",body.data.data.user_id,"1h")
+          this.$cookies.set("username",body.data.data.username,"1h")
+          this.$router.push({path:'/stockMenu'})
+        } else {
+          this.$message.error(body.data.msg);
+        }
+      });
       this.verificationStatus = '发送验证码';
     },
     seedVerificy() {
       if(this.verificationStatus !== '已发送') {
         console.log("发送验证码")
+        this.$axios.get(`/` + this.phone.code).then(body=>{
+          if(body.data.code !== 200) {
+            this.$message.info(body.data.msg);
+          }
+        })
         this.verificationStatus = '已发送';
         let count = 60;
         let timer = setInterval(() => {

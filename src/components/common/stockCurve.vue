@@ -1,8 +1,8 @@
 <template>
   <div>
-    <el-button @click="visible">点击</el-button>
-    <el-dialog :visible.sync="dialogVisible" width="50%" style="transform: translate(0%,10%);" top="2vh">
-      <div id="main" style="width: 800px;height: 400px;"></div>
+    <el-button  type="danger" plain @click="visible">行情</el-button>
+    <el-dialog :visible.sync="dialogVisible" width="60%" style="transform: translate(0%,10%);" top="2vh" @close="closes">
+      <div :id="value.stock_code" style="width: 90%;height: 400px;"></div>
     </el-dialog>
   </div>
 </template>
@@ -16,10 +16,10 @@
       return {
         dialogVisible: false,
         charts: '',
-        opinionData: ["3", "2", "40", "4", "5", "10"],
+        opinionData: ["3", "2.1", "40", "14.5", "5", "10"],
         xAxisData: ["1","2","3","4","5", "6"],
-        yAxisMax: 100,
-        interval: 20
+        yAxisMax: 50,
+        interval: 10
       }
     },
     methods: {
@@ -27,13 +27,17 @@
         let doc;
         this.dialogVisible = true;
         this.$nextTick(()=>{//dialog中的元素第一次打开只有在这里面能获取
-          this.getStockHistory(this.value.stockCode);
-          doc = document.getElementById('main');
-          this.drawLine(doc);
+          this.$axios.get('/api/stock/atockHistory?stockCode=' + this.value.stock_code).then(res=>{
+            this.opinionData = res.data.data.yData;
+            this.xAxisData = res.data.data.xData;
+            doc = document.getElementById(this.value.stock_code);
+            this.drawLine(doc);
+          });
         })
       },
-      getStockHistory(stockCode){
-        console.log(stockCode)
+      closes(){
+        console.log('关闭dislog')
+        //this.charts.clear();
       },
       drawLine(doc) {
         this.charts = this.$echarts.init(doc);
