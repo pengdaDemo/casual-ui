@@ -13,6 +13,7 @@
           </el-option>
         </el-select>
       </template>
+        <stock-curve :value="value"></stock-curve>
       </el-col>
     <el-table
       :data="buyList"
@@ -70,8 +71,10 @@
 </template>
 
 <script type="text/javascript">
+import StockCurve from "../common/stockCurve";
 export default { //这里需要将模块引出，可在其他地方使用
   name: "stockMenu",
+  components: {StockCurve},
   data (){ //注意：data即使不需要传数据，也必须return,否则会报错
     return {
       buyList: [],
@@ -86,7 +89,11 @@ export default { //这里需要将模块引出，可在其他地方使用
       }, {
         value: '1',
         label: '长期持有'
-      }]
+      }],
+      value: {
+        stockCode: 888888,
+        stockName: '东鹏'
+      }
 
     }
   },

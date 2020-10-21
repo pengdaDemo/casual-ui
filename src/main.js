@@ -8,12 +8,14 @@ import router from './router'
 import axios from 'axios'
 import VueCookies from 'vue-cookies'
 import qs from 'qs'
+import echarts from 'echarts'
 
 Vue.prototype.$axios = axios
 Vue.use(ElementUI)
 Vue.config.productionTip = false
 Vue.use(VueCookies)
 Vue.prototype.qs = qs;
+Vue.prototype.$echarts = echarts
 
 /* eslint-disable no-new */
 new Vue({

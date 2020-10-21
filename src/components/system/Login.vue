@@ -81,6 +81,15 @@ export default {
       if(this.verificationStatus !== '已发送') {
         console.log("发送验证码")
         this.verificationStatus = '已发送';
+        let count = 60;
+        let timer = setInterval(() => {
+          count--;
+          if(count === 0) {
+            clearInterval(timer);
+            this.verificationStatus = '发送验证码';
+          }
+          this.verificationStatus = '已发送' + count;
+        }, 1000);
         console.log(this.verificationStatus)
       }
     }
