@@ -86,24 +86,24 @@ export default {
       this.verificationStatus = '发送验证码';
     },
     seedVerificy() {
-      if(this.verificationStatus !== '已发送') {
+      if(this.verificationStatus === '发送验证码') {
         console.log("发送验证码")
         this.$axios.get(`/` + this.phone.code).then(body=>{
           if(body.data.code !== 200) {
             this.$message.info(body.data.msg);
+          } else {
+            this.verificationStatus = '已发送';
+            let count = 60;
+            let timer = setInterval(() => {
+              count--;
+              if(count === 0) {
+                this.verificationStatus = '发送验证码';
+                clearInterval(timer);
+              }
+              this.verificationStatus = '已发送' + count;
+            }, 1000);
           }
         })
-        this.verificationStatus = '已发送';
-        let count = 60;
-        let timer = setInterval(() => {
-          count--;
-          if(count === 0) {
-            clearInterval(timer);
-            this.verificationStatus = '发送验证码';
-          }
-          this.verificationStatus = '已发送' + count;
-        }, 1000);
-        console.log(this.verificationStatus)
       }
     }
   }

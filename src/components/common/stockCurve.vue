@@ -54,7 +54,7 @@
             bottom: '3%',
             top: '5%',
             containLabel: true,
-            width: 1100,
+            width: 600,
             height: 380
           },
 
