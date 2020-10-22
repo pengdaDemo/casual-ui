@@ -6,6 +6,8 @@ import MyStock from '@/components/stock/MyStock.vue'
 import Login from '@/components/system/Login.vue'
 import Register from '@/components/system/register.vue'
 import Index from '@/components/Index'
+import SideMenu from '@/components/stock/SideMenu.vue'
+import StockList from '@/components/stock/StockList.vue'
 
 Vue.use(Router)
 
@@ -33,8 +35,18 @@ export default new Router({
           component: Index
         },
         {
-          path: '/myStock',
-          component: MyStock
+          path: 'sideMenu',
+          component: SideMenu,
+          children: [
+            {
+              path: 'myStock',
+              component: MyStock
+            },
+            {
+              path: 'stockList',
+              component: StockList
+            }
+        ]
         }
        ]
     }
