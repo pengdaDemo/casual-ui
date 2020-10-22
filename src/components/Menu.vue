@@ -12,7 +12,7 @@
     <el-submenu index="2">
       <template slot="title">我的工作台</template>
       <el-row>
-      <el-menu-item index="myStock" :route="{path:'/myStock'}">我的股票</el-menu-item>
+      <el-menu-item index="sideMenu" :route="{path:'/sideMenu/stockList'}">我的股票</el-menu-item>
       </el-row>
       <el-row>
       <el-menu-item index="2-2">选项2</el-menu-item>
