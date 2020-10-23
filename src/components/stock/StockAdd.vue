@@ -42,6 +42,7 @@ export default {
         !this.form.buy_point||
         !this.form.sell_point) {
         this.$message.error("请填写完整信息");
+        return;
       }
       this.$axios.post(`/api/stock/add`, this.form,{headers:
                        {

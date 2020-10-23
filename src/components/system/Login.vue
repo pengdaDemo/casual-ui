@@ -74,6 +74,10 @@ export default {
 
     },
     phoneSubmit() {
+      if(!this.phone) {
+        this.$message.error("手机号不能为空!");
+        return;
+      }
       this.$axios.post(`/phoneLogin`, this.qs.stringify(this.phone)).then(body =>{
         if(body.data.code === 200) {
           this.$cookies.set("userId",body.data.data.user_id,"1h")
