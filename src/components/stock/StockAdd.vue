@@ -40,8 +40,6 @@ export default {
       if(!this.form.stock_code||
         !this.form.stock_Name||
         !this.form.buy_point||
-        !this.form.editor||
-        !this.form.userId||
         !this.form.sell_point) {
         this.$message.error("请填写完整信息");
       }
@@ -50,6 +48,12 @@ export default {
                          'Content-Type': 'application/json'
                        }}).then(body =>{
         if(body.data.code === 200) {
+          this.form.stock_code = '';
+          this.form.stock_Name = '';
+          this.form.buy_point = '';
+          this.form.sell_point = '';
+          this.$message.success(body.data.msg);
+
         } else {
           this.$message.error(body.data.msg);
         }

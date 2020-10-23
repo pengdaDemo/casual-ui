@@ -8,6 +8,37 @@
           </el-form-item>
         </el-form-item>
       </el-form>
+      <el-table
+        :data="taskList"
+        stripe
+        style="width: 80%;margin-left: 80px">
+        <el-table-column
+          prop="stock_Name"
+          label="股票名称"
+          width="120">
+        </el-table-column>
+        <el-table-column
+          prop="stock_code"
+          label="股票代码"
+          width="120">
+        </el-table-column>
+        <el-table-column
+          prop="now_point"
+          label="当前价格"
+          width="120">
+        </el-table-column>
+        <el-table-column
+          prop="buy_point"
+          label="入手价"
+          width="120">
+        </el-table-column>
+        <el-table-column
+          label="行情">
+          <template slot-scope="scope">
+            <stock-curve :value="scope.row"></stock-curve>
+          </template>
+        </el-table-column>
+      </el-table>
     </div>
 </template>
 
@@ -19,7 +50,7 @@
             conditional : {
               stockCode : ''
             },
-            stock:[]
+            taskList:[]
           }
       },
       methods : {

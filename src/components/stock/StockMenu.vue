@@ -1,6 +1,16 @@
 <template>
   <div id="vue">
-    <el-col :span="12">
+    <el-col :span="2">
+      <el-tooltip class="item" effect="dark" content="仅查看已关注" placement="top">
+      <el-switch
+        v-model="follow"
+        active-color="#13ce66"
+        @change="findStock"
+        inactive-color="#7C7E7D">
+      </el-switch>
+      </el-tooltip>
+    </el-col>
+    <el-col :span="11">
       <el-col>
     <span style="width: 100px;margin-left: 200px">可买入股票</span>
       <template>
@@ -46,7 +56,7 @@
       </el-table-column>
     </el-table>
     </el-col>
-    <el-col :span="12">
+    <el-col :span="11">
       <span style="width: 100px;margin-right: 200px">可卖出股票</span>
     <el-table
       :data="sellList"
@@ -103,16 +113,17 @@ export default { //这里需要将模块引出，可在其他地方使用
         value: '1',
         label: '长期持有'
       }],
-      value: {
-        stockCode: 888888,
-        stockName: '东鹏'
-      }
+      follow : false
 
     }
   },
   methods: {
       findStock() {
-        this.$axios.get('/api/stock/findStockList?riseCount=' + this.level).then(res=>{
+        let uri = 'findStockList?riseCount=' + this.level;
+        if(this.follow) {
+          uri = '/api/stock/findFollowStockList?riseCount=' + this.level + "&useId=" + this.$cookies.get("userId");
+        }
+        this.$axios.get(uri).then(res=>{
           this.buyList = res.data['buyList'];
           this.sellList = res.data['sellList'];
         })

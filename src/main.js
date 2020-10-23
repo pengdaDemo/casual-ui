@@ -9,6 +9,7 @@ import axios from 'axios'
 import VueCookies from 'vue-cookies'
 import qs from 'qs'
 import echarts from 'echarts'
+import { Message } from 'element-ui';
 
 Vue.prototype.$axios = axios
 Vue.use(ElementUI)
@@ -16,6 +17,24 @@ Vue.config.productionTip = false
 Vue.use(VueCookies)
 Vue.prototype.qs = qs;
 Vue.prototype.$echarts = echarts
+
+axios.interceptors.request.use(
+  config => {
+    if(config.url.indexOf('/api')!==-1) {
+      if(!VueCookies.get('userId')){
+        Message.info({message:"请登陆后操作！",offset:60});
+        router.push({path:'/login'})
+      }else {
+        return config;
+      }
+    } else {
+      return config;
+    }
+  },
+  error => {
+    return Promise.reject(error);
+  }
+);
 
 /* eslint-disable no-new */
 new Vue({

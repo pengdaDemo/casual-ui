@@ -19,6 +19,7 @@
         opinionData: ["3", "2.1", "40", "14.5", "5", "10"],
         xAxisData: ["1","2","3","4","5", "6"],
         yAxisMax: 50,
+        yAxisMin: 0,
         interval: 10
       }
     },
@@ -30,6 +31,9 @@
           this.$axios.get('/api/stock/atockHistory?stockCode=' + this.value.stock_code).then(res=>{
             this.opinionData = res.data.data.yData;
             this.xAxisData = res.data.data.xData;
+            this.yAxisMax = res.data.data.yAxisMax;
+            this.yAxisMin = res.data.data.yAxisMin;
+            this.interval = res.data.data.interval;
             doc = document.getElementById(this.value.stock_code);
             this.drawLine(doc);
           });
