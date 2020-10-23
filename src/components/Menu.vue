@@ -1,32 +1,34 @@
 <template>
 <div id="myMenu" style="margin: 0;padding: 0;height: 200px;width: 100%">
-  <el-menu background-color="#3DBF28"
-           text-color="#fff"
-           active-text-color="#ffd04b"
-           :defaultActive="activeIndex2"
-           mode="horizontal"
-           style="height:70px;margin: auto;width: 600px;margin-bottom: 200px"
-           :router="true">
-    <el-menu-item index="index" :route="{path:'/index'}">首页</el-menu-item>
-    <el-menu-item index="stockMenu" :route="{path:'/stockMenu'}">股票中心</el-menu-item>
-    <el-submenu index="2">
-      <template slot="title">我的工作台</template>
-      <el-row>
-      <el-menu-item index="sideMenu" :route="{path:'/sideMenu/stockList'}">我的股票</el-menu-item>
-      </el-row>
-      <el-row>
-      <el-menu-item index="2-2">选项2</el-menu-item>
-      </el-row>
-      <el-row>
-      <el-menu-item index="2-3">选项3</el-menu-item>
-      </el-row>
-    </el-submenu>
-    <el-menu-item index="3" disabled>消息中心</el-menu-item>
-    <el-menu-item index="4" :route="{path:'/login'}"v-if="!this.$cookies.get('username')">登录</el-menu-item>
-    <el-menu-item index="4" :route="true" @click="loginOut()" v-if="this.$cookies.get('username')">注销</el-menu-item>
-    <el-menu-item index="register" :route="{path:'/register'}" v-if="!this.$cookies.get('username')">注册</el-menu-item>
-  </el-menu>
-  <div style="position: absolute;margin:0px;padding:0px;width:100%;">
+  <div style="height: 200px;width: 100%;text-align: center;">
+    <el-menu background-color="#3DBF28"
+             text-color="#fff"
+             active-text-color="#ffd04b"
+             :defaultActive="activeIndex2"
+             mode="horizontal"
+             style="position: absolute;height:70px;display: inline-block;width: 600px"
+             :router="true">
+      <el-menu-item index="index" :route="{path:'/index'}">首页</el-menu-item>
+      <el-menu-item index="stockMenu" :route="{path:'/stockMenu'}">股票中心</el-menu-item>
+      <el-submenu index="2">
+        <template slot="title">我的工作台</template>
+        <el-row>
+          <el-menu-item index="sideMenu" :route="{path:'/sideMenu/stockList'}">我的股票</el-menu-item>
+        </el-row>
+        <el-row>
+          <el-menu-item index="2-2">选项2</el-menu-item>
+        </el-row>
+        <el-row>
+          <el-menu-item index="2-3">选项3</el-menu-item>
+        </el-row>
+      </el-submenu>
+      <el-menu-item index="3" disabled>消息中心</el-menu-item>
+      <el-menu-item index="4" :route="{path:'/login'}"v-if="!this.$cookies.get('username')">登录</el-menu-item>
+      <el-menu-item index="4" :route="true" @click="loginOut()" v-if="this.$cookies.get('username')">注销</el-menu-item>
+      <el-menu-item index="register" :route="{path:'/register'}" v-if="!this.$cookies.get('username')">注册</el-menu-item>
+    </el-menu>
+  </div>
+  <div style="margin:0px;padding:0px;width:100%;">
     <router-view/>
   </div>
 </div>

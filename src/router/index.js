@@ -8,6 +8,7 @@ import Register from '@/components/system/register.vue'
 import Index from '@/components/Index'
 import SideMenu from '@/components/stock/SideMenu.vue'
 import StockList from '@/components/stock/StockList.vue'
+import StockAdd from '@/components/stock/StockAdd.vue'
 
 Vue.use(Router)
 
@@ -45,6 +46,11 @@ export default new Router({
             {
               path: 'stockList',
               component: StockList
+            }
+            ,
+            {
+              path: 'stockAdd',
+              component: StockAdd
             }
         ]
         }
