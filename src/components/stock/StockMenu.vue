@@ -124,17 +124,18 @@ export default { //这里需要将模块引出，可在其他地方使用
   },
   methods: {
       findStock() {
-        let uri = 'findStockList?riseCount=' + this.level;
+        let uri = `findStockList?riseCount=${this.level}&pageIndex=${this.value.pageIndex}`;
         if(this.follow) {
-          uri = '/api/stock/findFollowStockList?riseCount=' + this.level + "&userId=" + this.$cookies.get("userId");
+          uri = `findStockList?riseCount=${this.level}&pageIndex=${this.value.pageIndex}` + "&userId=" + this.$cookies.get("userId");
         }
         this.$axios.get(uri).then(res=>{
           this.buyList = res.data['buyList'];
           this.sellList = res.data['sellList'];
+          this.value.total = res.data['total'];
         })
     },
     handleCurrentChange() {
-        console.log("翻页"+this.value.pageIndex);
+        this.findStock();
     }
   },
   mounted() {

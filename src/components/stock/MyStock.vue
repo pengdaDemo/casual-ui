@@ -23,6 +23,11 @@
         width="120">
       </el-table-column>
       <el-table-column
+        prop="now_point"
+        label="当前价格"
+        width="110">
+      </el-table-column>
+      <el-table-column
         prop="buy_point"
         label="入手价"
         width="110">
@@ -40,6 +45,7 @@
         </template>
       </el-table-column>
     </el-table>
+    <pagination :value="this.pagination" @current-change="handleCurrentChange"></pagination>
     <el-dialog :visible.sync="dialogVisible" width="40%" top="2vh">
       <el-form ref="form" :model="edit" label-width="80px" style="width: 300px;margin: auto">
         <el-form-item label="股票:">
@@ -74,13 +80,19 @@ export default {
         editSell : '',
         userId : this.$cookies.get("userId"),
         stockCode: ''
+      },
+      pagination: {
+        pageIndex : 1,
+        total: 100,
+        pageSize:10
       }
     }
   },
   methods : {
     onSubmit() {
-      this.$axios.get(`/api/stock/findAllFollowStock?stock=${this.conditional.stockCode}&userId=${this.edit.userId}`).then(res=>{
+      this.$axios.get(`/api/stock/findAllFollowStock?stock=${this.conditional.stockCode}&userId=${this.edit.userId}&pageIndex=${this.pagination.pageIndex}`).then(res=>{
         this.taskList = res.data.data;
+        this.pagination.total = res.data.total;
       })
     },
     stockEdit(row) {
@@ -102,6 +114,9 @@ export default {
     },
     deleteStock(row) {
       this.$message.info("暂不支持该操作!");
+    },
+    handleCurrentChange() {
+      this.onSubmit();
     }
   },
   mounted() {
