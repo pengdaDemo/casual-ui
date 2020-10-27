@@ -14,7 +14,7 @@
         </el-menu-item>
         <el-menu-item index="myStock" :route="{path:'/sideMenu/myStock'}">
           <i class="el-icon-menu"></i>
-          <span slot="title">我的股票</span>
+          <span slot="title">我的关注</span>
         </el-menu-item>
         <el-menu-item index="stockAdd" :route="{path:'/sideMenu/stockAdd'}">
           <i class="el-icon-plus"></i>

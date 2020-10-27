@@ -41,12 +41,12 @@
       <el-table-column
         prop="now_point"
         label="当前价格"
-        width="120">
+        width="110">
       </el-table-column>
       <el-table-column
         prop="buy_point"
         label="入手价"
-        width="120">
+        width="110">
       </el-table-column>
       <el-table-column
         label="行情">
@@ -75,12 +75,12 @@
       <el-table-column
         prop="now_point"
         label="当前价格"
-        width="120">
+        width="110">
       </el-table-column>
       <el-table-column
         prop="sell_point"
         label="卖出价"
-        width="120">
+        width="110">
       </el-table-column>
       <el-table-column
         label="行情">
@@ -121,7 +121,7 @@ export default { //这里需要将模块引出，可在其他地方使用
       findStock() {
         let uri = 'findStockList?riseCount=' + this.level;
         if(this.follow) {
-          uri = '/api/stock/findFollowStockList?riseCount=' + this.level + "&useId=" + this.$cookies.get("userId");
+          uri = '/api/stock/findFollowStockList?riseCount=' + this.level + "&userId=" + this.$cookies.get("userId");
         }
         this.$axios.get(uri).then(res=>{
           this.buyList = res.data['buyList'];

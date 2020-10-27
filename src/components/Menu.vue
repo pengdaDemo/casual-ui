@@ -9,17 +9,14 @@
              style="position: absolute;height:70px;display: inline-block;width: 600px"
              :router="true">
       <el-menu-item index="index" :route="{path:'/index'}">首页</el-menu-item>
-      <el-menu-item index="stockMenu" :route="{path:'/stockMenu'}">股票中心</el-menu-item>
+      <el-menu-item index="stockMenu" :route="{path:'/stockMenu'}">股票监控</el-menu-item>
       <el-submenu index="2">
         <template slot="title">我的工作台</template>
         <el-row>
-          <el-menu-item index="sideMenu" :route="{path:'/sideMenu/stockList'}">我的股票</el-menu-item>
+          <el-menu-item index="sideMenu" :route="{path:'/sideMenu/stockList'}">股票中心</el-menu-item>
         </el-row>
         <el-row>
-          <el-menu-item index="2-2">选项2</el-menu-item>
-        </el-row>
-        <el-row>
-          <el-menu-item index="2-3">选项3</el-menu-item>
+          <el-menu-item index="2-2">用户设置</el-menu-item>
         </el-row>
       </el-submenu>
       <el-menu-item index="3" disabled>消息中心</el-menu-item>

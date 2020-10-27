@@ -50,7 +50,7 @@
             trigger: 'axis'
           },
           legend: {
-            data: ['股票行情监控']
+            data: [this.value.stock_Name]
           },
           grid: {
             left: '3%',
@@ -75,7 +75,7 @@
           },
           yAxis: {
             type: 'value',
-            min: 0,
+            min: this.yAxisMin,
             max: this.yAxisMax,
             interval: this.interval,
             axisLabel: {
@@ -84,7 +84,7 @@
           },
 
           series: [{
-            name: '股票行情监控',
+            name: this.value.stock_Name,
             type: 'line',
             stack: '总量',
             data: this.opinionData,

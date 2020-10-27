@@ -14,7 +14,7 @@
         <el-input v-model="form.sell_point"></el-input>
       </el-form-item>
       <el-form-item style="margin-top: 30px">
-        <el-button type="primary" @click="onSubmit">立即创建</el-button>
+        <el-button type="primary" @click="onSubmit">添加</el-button>
       </el-form-item>
     </el-form>
   </div>
