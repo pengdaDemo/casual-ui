@@ -10,6 +10,7 @@ import VueCookies from 'vue-cookies'
 import qs from 'qs'
 import echarts from 'echarts'
 import { Message } from 'element-ui';
+import Pagination from "@/components/common/Pagination.vue";
 
 Vue.prototype.$axios = axios
 Vue.use(ElementUI)
@@ -17,6 +18,7 @@ Vue.config.productionTip = false
 Vue.use(VueCookies)
 Vue.prototype.qs = qs;
 Vue.prototype.$echarts = echarts
+Vue.component("pagination",Pagination);
 
 axios.interceptors.request.use(
   config => {

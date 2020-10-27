@@ -55,6 +55,7 @@
         </template>
       </el-table-column>
     </el-table>
+      <pagination :value="this.value" @current-change="handleCurrentChange"></pagination>
     </el-col>
     <el-col :span="11">
       <span style="width: 100px;margin-right: 200px">可卖出股票</span>
@@ -113,7 +114,11 @@ export default { //这里需要将模块引出，可在其他地方使用
         value: '1',
         label: '长期持有'
       }],
-      follow : false
+      follow : false,
+      value : {
+        pageIndex: 1,
+        total: 100
+      }
 
     }
   },
@@ -127,6 +132,9 @@ export default { //这里需要将模块引出，可在其他地方使用
           this.buyList = res.data['buyList'];
           this.sellList = res.data['sellList'];
         })
+    },
+    handleCurrentChange() {
+        console.log("翻页"+this.value.pageIndex);
     }
   },
   mounted() {

@@ -10,6 +10,7 @@ import SideMenu from '@/components/stock/SideMenu.vue'
 import StockList from '@/components/stock/StockList.vue'
 import StockAdd from '@/components/stock/StockAdd.vue'
 
+
 Vue.use(Router)
 
 export default new Router({
