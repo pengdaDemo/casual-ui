@@ -13,6 +13,12 @@
         stripe
         style="width: 50%;margin: auto">
         <el-table-column
+          prop="stock_id"
+          label="股票ID"
+          v-if="false"
+          width="120">
+        </el-table-column>
+        <el-table-column
           prop="stock_Name"
           label="股票名称"
           width="120">
@@ -48,6 +54,9 @@
           <template  slot-scope="scope">
             <el-button size="mini" @click="stockEdit(scope.row)" type="primary" icon="el-icon-edit" circle></el-button>
             <el-button size="mini" @click="deleteStock(scope.row)" type="danger" icon="el-icon-delete" circle></el-button>
+            <el-tooltip class="item" effect="dark" content="关注" placement="top">
+            <el-button size="mini" @click="followStock(scope.row)" type="warning" icon="el-icon-star-off" circle></el-button>
+            </el-tooltip>
           </template>
         </el-table-column>
       </el-table>
@@ -91,6 +100,10 @@
               pageIndex : 1,
               total: 100,
               pageSize:10
+            },
+            follow: {
+              userId : this.$cookies.get("userId"),
+              stockId: ''
             }
           }
       },
@@ -123,6 +136,17 @@
         },
         handleCurrentChange() {
           this.onSubmit();
+        },
+        followStock(row) {
+          this.follow.stockId = row.stock_id;
+          this.$axios.post(`/api/stock/followStock`, this.qs.stringify(this.follow)).then(res=>{
+            if(res.data.code === 200) {
+              this.common.success("关注成功!");
+            } else {
+              this.common.error(res.data.msg);
+            }
+            this.onSubmit();
+          })
         }
       },
       mounted() {

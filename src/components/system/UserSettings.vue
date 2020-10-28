@@ -12,8 +12,6 @@
           }
         },
       methods : {
-          client() {
-          }
       },
       mounted() {
           this.common.info("待开发！");

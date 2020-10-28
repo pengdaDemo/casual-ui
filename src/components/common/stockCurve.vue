@@ -1,7 +1,7 @@
 <template>
   <div>
     <el-button  type="danger" plain @click="visible">行情</el-button>
-    <el-dialog :visible.sync="dialogVisible" width="60%" style="transform: translate(0%,10%);" top="2vh" @close="closes">
+    <el-dialog :visible.sync="dialogVisible" width="60%" style="margin-top: 100px" top="2vh" @close="closes">
       <div :id="value.stock_code" style="width: 90%;height: 400px;"></div>
     </el-dialog>
   </div>

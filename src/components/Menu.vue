@@ -16,7 +16,7 @@
           <el-menu-item index="sideMenu" :route="{path:'/sideMenu/stockList'}">股票中心</el-menu-item>
         </el-row>
         <el-row>
-          <el-menu-item index="userSettings">用户设置</el-menu-item>
+          <el-menu-item index="userSettings" :route="{path:'/userSettings'}">用户设置</el-menu-item>
         </el-row>
       </el-submenu>
       <el-menu-item index="3" disabled>消息中心</el-menu-item>

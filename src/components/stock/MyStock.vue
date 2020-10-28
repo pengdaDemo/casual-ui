@@ -13,6 +13,12 @@
       stripe
       style="width: 50%;margin: auto">
       <el-table-column
+        prop="stock_id"
+        label="股票ID"
+        v-if="false"
+        width="120">
+      </el-table-column>
+      <el-table-column
         prop="stock_Name"
         label="股票名称"
         width="120">
@@ -47,8 +53,9 @@
         label="操作">
         <template  slot-scope="scope">
           <el-button size="mini" @click="stockEdit(scope.row)" type="primary" icon="el-icon-edit" circle></el-button>
+          <el-tooltip class="item" effect="dark" content="取消关注" placement="top">
           <el-button size="mini" @click="deleteStock(scope.row)" type="danger" icon="el-icon-delete" circle></el-button>
-          <el-button size="mini" @click="offectStock(scope.row)" type="warning" icon="el-icon-star-off" circle></el-button>
+          </el-tooltip>
         </template>
       </el-table-column>
     </el-table>
@@ -92,6 +99,10 @@ export default {
         pageIndex : 1,
         total: 100,
         pageSize:10
+      },
+      delete: {
+        userId : this.$cookies.get("userId"),
+        stockId: ''
       }
     }
   },
@@ -120,13 +131,18 @@ export default {
       })
     },
     deleteStock(row) {
-      this.common.info("暂不支持该操作!");
+      this.delete.stockId = row.stock_id;
+      this.$axios.delete(`/api/stock/deleteFollow?stockId=${this.delete.stockId}&userId=${this.delete.userId}`).then(res=>{
+        if(res.data.code === 200) {
+          this.common.success("取消关注成功!");
+        } else {
+          this.common.error(res.data.msg);
+        }
+        this.onSubmit();
+      })
     },
     handleCurrentChange() {
       this.onSubmit();
-    },
-    offectStock() {
-      this.common.info("暂不支持该操作!");
     }
   },
   mounted() {
