@@ -38,10 +38,17 @@
         width="110">
       </el-table-column>
       <el-table-column
+        label="行情">
+        <template slot-scope="scope">
+          <stock-curve :value="scope.row"></stock-curve>
+        </template>
+      </el-table-column>
+      <el-table-column
         label="操作">
         <template  slot-scope="scope">
           <el-button size="mini" @click="stockEdit(scope.row)" type="primary" icon="el-icon-edit" circle></el-button>
           <el-button size="mini" @click="deleteStock(scope.row)" type="danger" icon="el-icon-delete" circle></el-button>
+          <el-button size="mini" @click="offectStock(scope.row)" type="warning" icon="el-icon-star-off" circle></el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -104,19 +111,22 @@ export default {
     editSubmit() {
       this.$axios.post(`/api/stock/editStock`, this.qs.stringify(this.edit)).then(res=>{
         if(res.data.code === 200) {
-          this.$message.success("修改成功!");
+          this.common.success("修改成功!");
           this.dialogVisible = false;
         } else {
-          this.$message.error(res.data.msg);
+          this.common.error(res.data.msg);
         }
         this.onSubmit();
       })
     },
     deleteStock(row) {
-      this.$message.info("暂不支持该操作!");
+      this.common.info("暂不支持该操作!");
     },
     handleCurrentChange() {
       this.onSubmit();
+    },
+    offectStock() {
+      this.common.info("暂不支持该操作!");
     }
   },
   mounted() {

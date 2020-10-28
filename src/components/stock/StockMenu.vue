@@ -95,7 +95,6 @@
 </template>
 
 <script type="text/javascript">
-import StockCurve from "../common/stockCurve";
 export default { //这里需要将模块引出，可在其他地方使用
   name: "stockMenu",
   components: {StockCurve},
@@ -106,13 +105,13 @@ export default { //这里需要将模块引出，可在其他地方使用
       level: '2',
       options: [{
         value: '3',
-        label: '短期持有'
+        label: '短线持有'
       }, {
         value: '2',
-        label: '中期持有'
+        label: '中线持有'
       }, {
         value: '1',
-        label: '长期持有'
+        label: '长线持有'
       }],
       follow : false,
       value : {

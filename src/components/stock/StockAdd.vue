@@ -41,7 +41,7 @@ export default {
         !this.form.stock_Name||
         !this.form.buy_point||
         !this.form.sell_point) {
-        this.$message.error("请填写完整信息");
+        this.common.error("请填写完整信息");
         return;
       }
       this.$axios.post(`/api/stock/add`, this.form,{headers:
@@ -53,10 +53,10 @@ export default {
           this.form.stock_Name = '';
           this.form.buy_point = '';
           this.form.sell_point = '';
-          this.$message.success(body.data.msg);
+          this.common.success(body.data.msg);
 
         } else {
-          this.$message.error(body.data.msg);
+          this.common.error(body.data.msg);
         }
       });
     }

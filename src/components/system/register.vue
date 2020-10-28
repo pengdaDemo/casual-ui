@@ -80,9 +80,9 @@
               this.$cookies.set("userId", body.data.data.user_id, "1h")
               this.$cookies.set("username", body.data.data.username, "1h")
               this.$router.push({path: '/stockMenu'})
-              this.$message.success(body.data.msg);
+              this.common.success(body.data.msg);
             } else {
-              this.$message.error(body.data.msg);
+              this.common.error(body.data.msg);
             }
             this.$refs[formName].resetFields();
           });

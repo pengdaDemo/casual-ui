@@ -5,6 +5,7 @@ import StockMenu from '@/components/stock/StockMenu.vue'
 import MyStock from '@/components/stock/MyStock.vue'
 import Login from '@/components/system/Login.vue'
 import Register from '@/components/system/register.vue'
+import UserSettings from '@/components/system/UserSettings.vue'
 import Index from '@/components/Index'
 import SideMenu from '@/components/stock/SideMenu.vue'
 import StockList from '@/components/stock/StockList.vue'
@@ -31,6 +32,10 @@ export default new Router({
         {
           path: '/register',
           component: Register
+        },
+        {
+          path: '/userSettings',
+          component: UserSettings
         },
         {
           path: '/index',

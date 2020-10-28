@@ -68,14 +68,14 @@ export default {
           this.$cookies.set("username",body.data.data.username,"1h")
           this.$router.push({path:'/stockMenu'})
         } else {
-          this.$message.error(body.data.msg);
+          this.common.error(body.data.msg);
         }
       });
 
     },
     phoneSubmit() {
       if(!this.phone) {
-        this.$message.error("手机号不能为空!");
+        this.common.error("手机号不能为空!");
         return;
       }
       this.$axios.post(`/phoneLogin`, this.qs.stringify(this.phone)).then(body =>{
@@ -84,7 +84,7 @@ export default {
           this.$cookies.set("username",body.data.data.username,"1h")
           this.$router.push({path:'/stockMenu'})
         } else {
-          this.$message.error(body.data.msg);
+          this.common.error(body.data.msg);
         }
       });
       this.verificationStatus = '发送验证码';
@@ -94,7 +94,7 @@ export default {
         console.log("发送验证码")
         this.$axios.get(`/` + this.phone.code).then(body=>{
           if(body.data.code !== 200) {
-            this.$message.info(body.data.msg);
+            this.common.info(body.data.msg);
           } else {
             this.verificationStatus = '已发送';
             let count = 60;

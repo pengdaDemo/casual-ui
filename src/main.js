@@ -11,6 +11,8 @@ import qs from 'qs'
 import echarts from 'echarts'
 import { Message } from 'element-ui';
 import Pagination from "@/components/common/Pagination.vue";
+import StockCurve from "@/components/common/stockCurve";
+import common from "@/components/common/Common.js";
 
 Vue.prototype.$axios = axios
 Vue.use(ElementUI)
@@ -18,7 +20,9 @@ Vue.config.productionTip = false
 Vue.use(VueCookies)
 Vue.prototype.qs = qs;
 Vue.prototype.$echarts = echarts
+Vue.prototype.common = common
 Vue.component("pagination",Pagination);
+Vue.component("stockCurve",StockCurve);
 
 axios.interceptors.request.use(
   config => {
