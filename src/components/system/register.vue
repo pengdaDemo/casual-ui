@@ -75,7 +75,7 @@
     methods: {
       onSubmit(formName) {
         this.$refs[formName].validate((valid) => {
-          this.$axios.post(`/userRegister`, this.qs.stringify(this.form)).then(body => {
+          this.$axios.post(`/api/userRegister`, this.qs.stringify(this.form)).then(body => {
             if (body.data.code === 200) {
               this.$cookies.set("userId", body.data.data.user_id, "1h")
               this.$cookies.set("username", body.data.data.username, "1h")

@@ -62,7 +62,7 @@ export default {
   },
   methods: {
     onSubmit() {
-      this.$axios.post(`/userLogin`, this.qs.stringify(this.form)).then(body =>{
+      this.$axios.post(`/api/userLogin`, this.qs.stringify(this.form)).then(body =>{
         if(body.data.code === 200) {
           this.$cookies.set("userId",body.data.data.user_id,"1h")
           this.$cookies.set("username",body.data.data.username,"1h")
@@ -78,7 +78,7 @@ export default {
         this.common.error("手机号不能为空!");
         return;
       }
-      this.$axios.post(`/phoneLogin`, this.qs.stringify(this.phone)).then(body =>{
+      this.$axios.post(`/api/phoneLogin`, this.qs.stringify(this.phone)).then(body =>{
         if(body.data.code === 200) {
           this.$cookies.set("userId",body.data.data.user_id,"1h")
           this.$cookies.set("username",body.data.data.username,"1h")
@@ -92,7 +92,7 @@ export default {
     seedVerificy() {
       if(this.verificationStatus === '发送验证码') {
         console.log("发送验证码")
-        this.$axios.get(`/` + this.phone.code).then(body=>{
+        this.$axios.get(`/api/` + this.phone.code).then(body=>{
           if(body.data.code !== 200) {
             this.common.info(body.data.msg);
           } else {

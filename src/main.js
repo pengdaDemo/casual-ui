@@ -26,7 +26,7 @@ Vue.component("stockCurve",stockCurve);
 
 axios.interceptors.request.use(
   config => {
-    if(config.url.indexOf('/api')!==-1) {
+    if(config.url.indexOf('/api/stock')!==-1) {
       if(!VueCookies.get('userId')){
         Message.info({message:"请登陆后操作！",offset:60});
         router.push({path:'/login'})

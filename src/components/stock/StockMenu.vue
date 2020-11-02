@@ -122,9 +122,9 @@ export default { //这里需要将模块引出，可在其他地方使用
   },
   methods: {
       findStock() {
-        let uri = `findStockList?riseCount=${this.level}&pageIndex=${this.value.pageIndex}`;
+        let uri = `/api/findStockList?riseCount=${this.level}&pageIndex=${this.value.pageIndex}`;
         if(this.follow) {
-          uri = `findStockList?riseCount=${this.level}&pageIndex=${this.value.pageIndex}` + "&userId=" + this.$cookies.get("userId");
+          uri = `/api/findStockList?riseCount=${this.level}&pageIndex=${this.value.pageIndex}` + "&userId=" + this.$cookies.get("userId");
         }
         this.$axios.get(uri).then(res=>{
           this.buyList = res.data['buyList'];
